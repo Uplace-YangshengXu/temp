@@ -8,18 +8,18 @@ clc;
 % 
 % 
 % 
-
-
-addpath othertry/
 %load Cal_mat_3CH.mat % for 3 channel needle
-load Cal_mat_3CH_alldata.mat
+
+load Cal_mat_2CH_alldata.mat
+%load Cal_mat_2CH.mat
+
 %load Cal_mat_3CH_nomean.mat
-num_CH = 3; % !!! when change this variable, make sure check line 93 and 112 the channel number is consistant !!!
+num_CH = 2; % !!! when change this variable, make sure check line 93 and 112 the channel number is consistant !!!
 
 
 num_AA = 4;
-num_trial_1 = 1:1:5; % for calibration.xls
-num_trial_2 = 1:1:5; % for validation.xls exclude stright line
+num_trial_1 = 1:1:2; % for calibration.xls
+num_trial_2 = 1:1:2; % for validation.xls exclude stright line
 
 namefile = 'validation.xls'; % data used to validate the calibration matrix
 num_trial = num_trial_2;
@@ -90,8 +90,8 @@ for i = 1:size(curvature,2) % four curves (excluding straight)
         fbg_curve_0d = data(:,index);
         one_size = size(fbg_curve_0d, 1);
         
-        predict_curvature = [ones(one_size, 1) fbg_curve_0d(:, 1:3) ones(one_size, 1) fbg_curve_0d(:, 4:6) ones(one_size, 1) fbg_curve_0d(:, 7:9) ones(one_size, 1) fbg_curve_0d(:, 10:12)] * H;
-        
+        %predict_curvature = [ones(one_size, 1) fbg_curve_0d(:, 1:3) ones(one_size, 1) fbg_curve_0d(:, 4:6) ones(one_size, 1) fbg_curve_0d(:, 7:9) ones(one_size, 1) fbg_curve_0d(:, 10:12)] * H;
+        predict_curvature = [ones(one_size, 1) fbg_curve_0d(:, 1:2) ones(one_size, 1) fbg_curve_0d(:, 3:4) ones(one_size, 1) fbg_curve_0d(:, 5:6) ones(one_size, 1) fbg_curve_0d(:, 7:8)] * H;
         plot(subax1,1:size(predict_curvature,1),predict_curvature(:,1),cl);
         plot(subax2,1:size(predict_curvature,1),predict_curvature(:,2),cl);
         error_mat = predict_curvature - [curvature(i) 0 curvature(i) 0 curvature(i) 0 curvature(i) 0];
@@ -109,7 +109,8 @@ for i = 1:size(curvature,2) % four curves (excluding straight)
 
         data = readmatrix(namefile,'Sheet',strcat(sheet_name,'_90deg')) - fbg_unbent_90d;
         fbg_curve_90d = data(:,index);
-        predict_curvature = [ones(one_size, 1) fbg_curve_90d(:, 1:3) ones(one_size, 1) fbg_curve_90d(:, 4:6) ones(one_size, 1) fbg_curve_90d(:, 7:9) ones(one_size, 1) fbg_curve_90d(:, 10:12)] * H;
+        %predict_curvature = [ones(one_size, 1) fbg_curve_90d(:, 1:3) ones(one_size, 1) fbg_curve_90d(:, 4:6) ones(one_size, 1) fbg_curve_90d(:, 7:9) ones(one_size, 1) fbg_curve_90d(:, 10:12)] * H;
+        predict_curvature = [ones(one_size, 1) fbg_curve_90d(:, 1:2) ones(one_size, 1) fbg_curve_90d(:, 3:4) ones(one_size, 1) fbg_curve_90d(:, 5:6) ones(one_size, 1) fbg_curve_90d(:, 7:8)] * H;
         error_mat = predict_curvature - [0 curvature(i) 0 curvature(i) 0 curvature(i) 0 curvature(i)];
         sum_error_AAs = sum_error_AAs + abs(error_mat);
         data_count = data_count + 1;

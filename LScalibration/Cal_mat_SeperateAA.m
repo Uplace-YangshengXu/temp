@@ -4,10 +4,10 @@ clear;
 clc;
 % correct least square method for FBG calibration
 % this version don't take mean value of trials
-num_CH = 3;
+num_CH = 2;
 num_AA = 4;
-num_trial_1 = 1:1:5; % 0 deg
-num_trial_2 = 1:1:5; % 90 deg
+num_trial_1 = 1:1:2; % 0 deg
+num_trial_2 = 1:1:2; % 90 deg
 namefile1 = "calibration.xls";
 namefile2 = "validation.xls";
 
@@ -17,7 +17,7 @@ curvature1 = [0,0.5,1.6,2.0,2.5,3.2,4.0]; % constant curvature curve for calibra
 curvature2 = [0,0.25,0.8,1.0,1.25,3.125]'; % for validation.xls
 real_mat = []; % correspoding curvature for measure_mat
 
-cal_name = 'Cal_mat_3CH.mat';
+cal_name = 'Cal_mat_2CH.mat';
 ifcombine_c_v = 1;
 
 
@@ -39,7 +39,7 @@ for i = 1:size(curvature,2)
 end
 
 if ifcombine_c_v == 1
-    cal_name = 'Cal_mat_3CH_alldata.mat';
+    cal_name = 'Cal_mat_2CH_alldata.mat';
     curvature = curvature2;
     for i = 1:size(curvature,2)
         row_real_mat = [];

@@ -8,7 +8,7 @@ num_point = 6000;
 % curvature = [0,0.25,0.8,1.0,1.25,3.125]; % constant curvature curve
  
 namefile = 'calibration.xls';
-num_trial = 1:1:5;
+num_trial = 1:1:2;
 curvature = [0.5 1.6 2 2.5 3.2];
 
 ilustration = figure;
@@ -74,7 +74,7 @@ while(timestamp <= row)
     
 
     % in form of ch1AA1 ch1AA2 ch1AA3 ...
-    addpoints(AA1_ch1_plot,timestamp,cal_data(1))
+    addpoints(AA1_ch1_plot,timestamp,cal_data(8))
     %addpoints(AA2_ch1_plot,timestamp,cal_data(2))
     %addpoints(AA3_ch1_plot,timestamp,cal_data(3))
     %addpoints(AA4_ch1_plot,timestamp,cal_data(4))
@@ -89,5 +89,5 @@ while(timestamp <= row)
 %     addpoints(AA4_ch3_plot,timestamp,cal_data(12))
 
     timestamp = timestamp + 1;
-    pause(0.01)
+    %pause(0.01)
 end
